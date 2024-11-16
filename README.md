@@ -85,3 +85,19 @@ sipe 3기 상태관리 미션에서 xstate 사용 법을 공유하기 위해 만
 - 주차 가능 여부 (가능, 불가능)
 
 5page : 결과 확인 - 퍼널 진행하면 입력 받은 값 화면에 보여줌 , 의뢰하기 하면 success 페이지로 이동, 처음부터 버튼 누루면 다시 처음부터 진행
+
+---
+
+마무리..
+
+요 정도면 xstate에 코어한 기본 기능은 파악가능
+
+조금더 준비 시간이 있었으면 조금 더 라이브러리에서 지원해주는 기능을 활용해 볼 수 있을 것 같다
+
+- state 충첩 - 복잡한 구조의 경우 상태를 중첩해서 사용할 수 있는 듯?
+- history state - 상태가 중첩 되어있을 때 부모가 자식상태의 마지막 상태를 기억
+  [https://stately.ai/docs/history-states](https://stately.ai/docs/history-states)
+- 비동기 요청결합 - 사실 mutation은 tanstack/query 로 핸들링하는 데 보통 xstate에서 Promise를 핸들링 할 수 있는 듯? (+spawn)
+  [https://stately.ai/docs/cheatsheet#invoking-actors](https://stately.ai/docs/cheatsheet#invoking-actors)
+
+--> 심화내용은 글봐도 잘 모르겠긴함 ㅜ 조금 더 봐야할 듯
