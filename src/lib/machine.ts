@@ -22,7 +22,8 @@ export const cleaningRequestMachine = cleaningRequestMachineSetup.createMachine(
             }),
           },
           NEXT: {
-            target: "date",
+            target: "date", // transition
+            guard: ({ context }) => Boolean(context.cleaningType),
           },
         },
       },
@@ -41,6 +42,7 @@ export const cleaningRequestMachine = cleaningRequestMachineSetup.createMachine(
           },
           NEXT: {
             target: "address",
+            guard: ({ context }) => !isNaN(Number(context.time)),
           },
           PREVIOUS: {
             target: "select",
@@ -89,6 +91,7 @@ export const cleaningRequestMachine = cleaningRequestMachineSetup.createMachine(
 
           RESET: {
             target: "select",
+            actions: assign({}),
           },
         },
       },
