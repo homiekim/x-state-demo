@@ -1,13 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Layout from "@/components/layout";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { cleaningRequestActor } from "../_app";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -26,8 +25,11 @@ import {
   RoomStructure,
   VerandaCount,
 } from "@/model";
+import useCleaningRequestMachine from "@/hook/useCleaningRequestMachine";
 
 export default function Detail() {
+  const { setDetails } = useCleaningRequestMachine();
+
   return (
     <Layout>
       <div className="flex flex-col gap-4">
@@ -35,24 +37,12 @@ export default function Detail() {
           <Label>상세 주소를 입력해주세요</Label>
           <Input
             placeholder="상세주소"
-            onChange={(e) => {
-              const value = e.target.value;
-              cleaningRequestActor.send({
-                type: "SET_DETAILS",
-                details: { detailedAddress: value },
-              });
-            }}
+            onChange={(e) => setDetails({ detailedAddress: e.target.value })}
           />
           <Label>공급면적</Label>
           <Input
             placeholder="m²"
-            onChange={(e) => {
-              const value = e.target.value;
-              cleaningRequestActor.send({
-                type: "SET_DETAILS",
-                details: { areaSize: value },
-              });
-            }}
+            onChange={(e) => setDetails({ areaSize: e.target.value })}
           />
         </div>
         <div>
@@ -89,14 +79,12 @@ export default function Detail() {
 }
 
 const 건물종류Select = () => {
+  const { setDetails } = useCleaningRequestMachine();
   return (
     <Select
-      onValueChange={(value) => {
-        cleaningRequestActor.send({
-          type: "SET_DETAILS",
-          details: { buildingType: value as BuildingType },
-        });
-      }}
+      onValueChange={(value) =>
+        setDetails({ buildingType: value as BuildingType })
+      }
     >
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="건물 종류를 선택해주세요" />
@@ -115,14 +103,12 @@ const 건물종류Select = () => {
 };
 
 const 방구조Select = () => {
+  const { setDetails } = useCleaningRequestMachine();
   return (
     <Select
-      onValueChange={(value) => {
-        cleaningRequestActor.send({
-          type: "SET_DETAILS",
-          details: { roomStructure: value as RoomStructure },
-        });
-      }}
+      onValueChange={(value) =>
+        setDetails({ roomStructure: value as RoomStructure })
+      }
     >
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="방구조를 선택해주세요" />
@@ -141,14 +127,10 @@ const 방구조Select = () => {
 };
 
 const 복층여부Select = () => {
+  const { setDetails } = useCleaningRequestMachine();
   return (
     <Select
-      onValueChange={(value) => {
-        cleaningRequestActor.send({
-          type: "SET_DETAILS",
-          details: { hasDuplex: value === "있음" },
-        });
-      }}
+      onValueChange={(value) => setDetails({ hasDuplex: value === "있음" })}
     >
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="복층 여부를 선택해주세요" />
@@ -167,14 +149,12 @@ const 복층여부Select = () => {
 };
 
 const 화장실개수Select = () => {
+  const { setDetails } = useCleaningRequestMachine();
   return (
     <Select
-      onValueChange={(value) => {
-        cleaningRequestActor.send({
-          type: "SET_DETAILS",
-          details: { bathroomCount: value as BathroomCount },
-        });
-      }}
+      onValueChange={(value) =>
+        setDetails({ bathroomCount: value as BathroomCount })
+      }
     >
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="화장실개수를 선택해주세요" />
@@ -193,14 +173,12 @@ const 화장실개수Select = () => {
 };
 
 const 베란다개수Select = () => {
+  const { setDetails } = useCleaningRequestMachine();
   return (
     <Select
-      onValueChange={(value) => {
-        cleaningRequestActor.send({
-          type: "SET_DETAILS",
-          details: { verandaCount: value as VerandaCount },
-        });
-      }}
+      onValueChange={(value) =>
+        setDetails({ verandaCount: value as VerandaCount })
+      }
     >
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="베란다개수를 선택해주세요" />
@@ -219,14 +197,10 @@ const 베란다개수Select = () => {
 };
 
 const 엘리베이터여부Select = () => {
+  const { setDetails } = useCleaningRequestMachine();
   return (
     <Select
-      onValueChange={(value) => {
-        cleaningRequestActor.send({
-          type: "SET_DETAILS",
-          details: { hasElevator: value === "있음" },
-        });
-      }}
+      onValueChange={(value) => setDetails({ hasElevator: value === "있음" })}
     >
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="엘리베이터 여부를 선택해주세요" />
@@ -245,14 +219,12 @@ const 엘리베이터여부Select = () => {
 };
 
 const 주차가능여부Select = () => {
+  const { setDetails } = useCleaningRequestMachine();
   return (
     <Select
-      onValueChange={(value) => {
-        cleaningRequestActor.send({
-          type: "SET_DETAILS",
-          details: { parkingAvailable: value === "가능" },
-        });
-      }}
+      onValueChange={(value) =>
+        setDetails({ parkingAvailable: value === "가능" })
+      }
     >
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="주차가능 여부를 선택해주세요" />

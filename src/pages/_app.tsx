@@ -1,9 +1,6 @@
-import { cleaningRequestMachine } from "@/lib/machine";
+import { cleaningRequestActor } from "@/lib/actor";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { createActor } from "xstate";
-
-export const cleaningRequestActor = createActor(cleaningRequestMachine);
 
 cleaningRequestActor.start();
 
